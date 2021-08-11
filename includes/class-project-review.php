@@ -111,8 +111,10 @@ class Project_Review {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-project-review-i18n.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/post-types.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/templates.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/post-meta.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-project-review-helper.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/rest-api.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/shortcodes/projects-list.php';
 
 		/**

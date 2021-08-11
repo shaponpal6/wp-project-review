@@ -6,11 +6,13 @@
 }
 section.sppr-section {
   margin-top: 0;
-  margin-bottom: 80px;
+  margin-bottom: 10px;
+  padding: 0;
   width: 100%;
 }
 .sppr-items {
   width: 100%;
+  min-height: 50vh;
 }
 .sppr-item {
   width: 100%;
@@ -49,4 +51,23 @@ span.sppr-new {
   justify-content: flex-start;
   top: -5px;
   left: 15px;
+}
+
+/* filter */
+.sppr-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+}
+.sppr-filter-container div {
+    width: 100%;
+}
+.sppr-filter-container div:not(:last-child) {
+    margin-right: 10px;
+}
+input#sppr-search {
+  width: 100%;
+    border-radius: 10px 10px 10px 10px;
+    padding: 8px;
 }
