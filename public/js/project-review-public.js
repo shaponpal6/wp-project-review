@@ -12,7 +12,7 @@
 
 		$('#sppr-filter-container').css('opacity', '1');
 
-		// Onclick
+		// Onclick 
 		let projectData = {}
 		const setProjectFeatureDesc = (projectId, context) => {
 			return;
@@ -47,7 +47,7 @@
 						// html += li.innerHTML;
 						html += '<li class="sppr-features-item" onClick="' +
 							setProjectFeatureDesc(projectId, features['feature_' + (i + 1) + '_desc'])
-							+ '">' + features['feature_' + (i + 1)] + '</li>';
+							+ '">✅ ' + features['feature_' + (i + 1)] + '</li>';
 					}
 				}
 				html += '</ul>';
@@ -131,14 +131,14 @@
 					html += '<div class="sppr-item">';
 					html += '<div class="sppr-title">';
 					html += '<span class="sppr-new">New</span>';
-					html += '<div class="sppr-name">##' + posts[key]['post_title'] + '</div>';
+					html += '<div class="sppr-name">' + posts[key]['post_title'] + '</div>';
 					html += '</div>';
 					html += '<div class="sppr-button"><span class="sppr-risks sppr-risks-' + posts[key]['risks'] + '">' + risks[posts[key]['risks']] + '</span></div>';
 					html += '<div class="sppr-network"><span class="sppr-network sppr-network-' + posts[key]['network'] + '">' + networks[posts[key]['network']] + '</span></div>';
 					html += '<div class="sppr-site"><a href="' + posts[key]['action_buttons']['button_1_link'] + '">Visit</a></div>';
 					html += '<div class="sppr-arrow"> > </div>';
 					html += '</div>';
-					html += '<div id="sppr-details-' + key + '" class="sppr-details">hide ....</div>';
+					html += '<div id="sppr-details-' + key + '" class="sppr-details"></div>';
 					div.innerHTML = html;
 					return div;
 				});

@@ -14,22 +14,28 @@ section.sppr-section {
   width: 100%;
   min-height: 50vh;
 }
+.sppr-item-wrapper {
+    /* border: 1px solid #2c3f51; */
+    margin-bottom: 15px;
+    /* border-radius: 10px; */
+    position: relative;
+    /* overflow: hidden; */
+}
 .sppr-item {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1em;
-  /* background: #121a25; */
-  border: 1px solid #2c3f51;
-  border-radius: 10px;
   font-weight: 700;
+  margin-bottom: 15px;
   cursor: pointer;
   margin: 0;
+  padding: 1em;
   font-size: 17px;
+  background-color: aliceblue;
   flex-wrap: wrap;
   align-items: center;
-  position: relative;
-  margin-bottom: 15px;
+  border: 1px solid #2c3f51;
+  border-radius: 10px;
 }
 .sppr-title {
   font-family: sans-serif;
@@ -37,6 +43,20 @@ section.sppr-section {
   font-size: 21px;
   cursor: pointer;
   width: 27%;
+}
+span.sppr-risks.sppr-risks-some {
+    color: #fff;
+    background: #3f546a;
+    border: 1px solid #5c7894;
+    padding: 4px 5px 6px;
+    border-radius: 4px;
+}
+span.sppr-risks.sppr-risks-medium {
+    color: #fff;
+    background: #835822;
+    border: 1px solid #cc7d08;
+    padding: 4px 5px 6px;
+    border-radius: 4px;
 }
 span.sppr-new {
   background: #58ca78;
@@ -51,6 +71,46 @@ span.sppr-new {
   justify-content: flex-start;
   top: -5px;
   left: 15px;
+}
+.sppr-details {
+    display: none;
+    margin-top: 20px;
+    padding: 1em;
+    border: 1px solid #2c3f51;
+    border-radius: 0 0 10px 10px;
+    margin-top: -10px;
+    overflow: hidden;
+    z-index: 9999;
+    background: #fff;
+}
+.sppr-details-title {
+    margin-bottom: .8em;
+}
+.sppr-features-item {
+    margin-bottom: .3em;
+}
+.sppr-features {
+    margin-bottom: 1em;
+}
+.sppr-details-note, .sppr-details-alert, .sppr-details-date {
+    margin-bottom: .3em;
+}
+.sppr-buttons a {
+  background: #7ad0dd;
+  color: #0b1013;
+  border-radius: 4px;
+  padding: 7px 12px 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.sppr-buttons a:nth-child(2) {
+  background-color: #00d084;
+}
+.sppr-buttons a:nth-child(3) {
+  background-color: #fcb900;
 }
 
 /* filter */
