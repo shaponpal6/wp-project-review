@@ -2,6 +2,7 @@
 
 
 function sppr_projects_list_filter( $risks, $networks ) {
+	ob_start();
 	?>
 	<div class="sppr-filter-container" id="sppr-filter-container">
 		<div class="sppr-filter-network">
@@ -31,6 +32,7 @@ function sppr_projects_list_filter( $risks, $networks ) {
 		</div>
 	</div>
 	<?php
+	return ob_get_clean();
 }
 
 function sppr_projects_list_shortcode( $atts ) {
@@ -58,20 +60,7 @@ function sppr_projects_list_shortcode( $atts ) {
 	echo '</section>';
 	echo '<section class="sppr-section">';
 	echo '<div id="sppr-items" class="sppr-items">';
-	if( !empty( $posts) && count( $posts ) > 0){
-		foreach($posts as $post){
-			echo '<div class="sppr-item">';
-			echo '<div class="sppr-title">';
-			echo '<span class="sppr-new">New</span>';
-			echo '<div class="sppr-name">'.$post['post_title'].'</div>';
-			echo '</div>';
-			echo '<div class="sppr-button"><span class="sppr-risks sppr-risks-'.$post['risks'].'">'.$risks[$post['risks']].'</span></div>';
-			echo '<div class="sppr-network"><span class="sppr-network sppr-network-'.$post['network'].'">'.$networks[$post['network']].'</span></div>';
-			echo '<div class="sppr-site"><a href="'.$post['action_buttons']['button_1_link'].'">Visit</a></div>';
-			echo '<div class="sppr-arrow"> > </div>';
-			echo '</div>';
-		}
-	}
+	echo '<div class="sppr-loader-wrapper"><div class="sppr-loader"></div></div>';
 	echo '</div>';
 	echo '</section>';
 	echo '</div>';

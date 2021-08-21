@@ -2,6 +2,9 @@
 	'use strict';
 
 	$(window).load(function () {
+		const siteUrl = 'http://chat.test/';
+		const pluginDirUrl = 'http://chat.test/wp-content/plugins/project-review/';
+
 		$('#sppr-filter-network').multiSelect({
 			'noneText': 'Filter by network',
 		});
@@ -121,6 +124,7 @@
 			let postsArray = Object.keys(data['posts']) || [];
 
 			let projectsHtml = ''
+			console.log(`filterPosts`, posts)
 			if (filterPosts.length > 0) {
 				projectsHtml = filterPosts.map((key) => {
 					let html = '';
@@ -131,12 +135,15 @@
 					html += '<div class="sppr-item">';
 					html += '<div class="sppr-title">';
 					html += '<span class="sppr-new">New</span>';
+					if (posts[key]['logo'][0] !== undefined && posts[key]['logo'][0] !== '') {
+						html += '<div class="sppr-logo"><img src="' + posts[key]["logo"][0] + '"/></div>';
+					}
 					html += '<div class="sppr-name">' + posts[key]['post_title'] + '</div>';
 					html += '</div>';
 					html += '<div class="sppr-button"><span class="sppr-risks sppr-risks-' + posts[key]['risks'] + '">' + risks[posts[key]['risks']] + '</span></div>';
-					html += '<div class="sppr-network"><span class="sppr-network sppr-network-' + posts[key]['network'] + '">' + networks[posts[key]['network']] + '</span></div>';
-					html += '<div class="sppr-site"><a href="' + posts[key]['action_buttons']['button_1_link'] + '">Visit</a></div>';
-					html += '<div class="sppr-arrow"> > </div>';
+					html += '<div class="sppr-network"><span class="sppr-network sppr-network-' + posts[key]['network'] + '"><img src="' + pluginDirUrl + 'public/icons/network/' + networks[posts[key]['network']].replace(/\s+/g, '').toLowerCase() + '.svg" alt="" class="network-logo"></span></div>';
+					html += '<div class="sppr-site"><a href="' + posts[key]['action_buttons']['button_1_link'] + '">&#128279; Visit Website</a></div>';
+					html += '<div class="sppr-arrow"><span class="sppr-right-arrow">&rsaquo;</span></div>';
 					html += '</div>';
 					html += '<div id="sppr-details-' + key + '" class="sppr-details"></div>';
 					div.innerHTML = html;
@@ -196,6 +203,7 @@
 		$.getJSON('http://chat.test/wp-json/sppr/v1/projects/list', {}, function (data, textStatus, jqXHR) {
 			// console.log('data :>> ', data);
 			projectData = data;
+			console.log(`data`, data)
 			setEventWithData(data);
 		})
 			.done(function () { })

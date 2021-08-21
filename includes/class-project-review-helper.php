@@ -24,6 +24,11 @@ class SPPRProjectHelper {
     return $posts;
   }
 
+  public static function get_attachment_data($id = 0) {
+      if($id == 0) return [];
+      return wp_get_attachment_image_src($id);
+  }
+
   public static function get_posts_meta($num = -1) {
       $posts = self::get_posts();
       $projects = array();
@@ -42,7 +47,7 @@ class SPPRProjectHelper {
             $project['note'] = get_post_meta($id,"note",true);
             $project['alert'] = get_post_meta($id,"alert",true);
             $project['action_buttons'] = self::acf_get_fields_in_group($id,"action_buttons");
-            $project['logo'] = get_post_meta($id,"logo",true);
+            $project['logo'] = self::get_attachment_data(get_post_meta($id,"logo",true));
             $project['tttt'] =  get_field( get_post_meta($id,"_risks",true) );
             $projects[$id] = $project;
         }
