@@ -1,6 +1,6 @@
 <?php
 
-
+if ( ! function_exists('sppr_projects_list_shortcode') ) {
 function sppr_projects_list_filter( $risks, $networks ) {
 	ob_start();
 	?>
@@ -44,7 +44,7 @@ function sppr_projects_list_shortcode( $atts ) {
 		'sppr-projects-list'
 	);
 
-    $posts = SPPRProjectHelper::get_posts_meta();
+    $posts = SPPRProjectHelper::get_posts_meta('');
     $risks = SPPRTemplates::$risks;
     $networks = SPPRTemplates::$networks;
 
@@ -62,9 +62,11 @@ function sppr_projects_list_shortcode( $atts ) {
 	echo '<div id="sppr-items" class="sppr-items">';
 	echo '<div class="sppr-loader-wrapper"><div class="sppr-loader"></div></div>';
 	echo '</div>';
+	echo '<div class="sppr-load-more-wrapper"><div id="sppr-lode-more">Load More</div></div>';
 	echo '</section>';
 	echo '</div>';
 	return ob_get_clean();
 
 }
 add_shortcode( 'sppr-projects-list', 'sppr_projects_list_shortcode' );
+}

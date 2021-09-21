@@ -99,6 +99,8 @@ class Project_Review_Public {
 
 		wp_enqueue_script( $this->plugin_name.'multi-select-js', plugin_dir_url( __FILE__ ) . 'js/jquery.multi-select.min.js', array( 'jquery' ), $this->version.time(), false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/project-review-public.js', array( 'jquery',  $this->plugin_name.'multi-select-js' ), $this->version.time(), false );
+		$params = array('siteUrl' => site_url());
+		wp_localize_script( $this->plugin_name, 'spprobj', $params );
 
 	}
 

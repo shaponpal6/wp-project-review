@@ -2,8 +2,7 @@
 	'use strict';
 
 	$(window).load(function () {
-		const siteUrl = 'http://chat.test/';
-		const pluginDirUrl = 'http://chat.test/wp-content/plugins/project-review/';
+		const pluginDirUrl = spprobj.siteUrl + '/wp-content/plugins/project-review/';
 
 		$('#sppr-filter-network').multiSelect({
 			'noneText': 'Filter by network',
@@ -28,6 +27,18 @@
 		}
 		const itemClick = (projectId) => {
 			const target = document.getElementById('sppr-details-' + projectId);
+			const icon = target.previousSibling.querySelector('.sppr-arrow');
+			if (target.style.display === 'block') {
+				target.style.display = 'none'
+				if (icon) {
+					icon.innerHTML = '<span class="iconify" data-icon="fe:arrow-right"></span>';
+				}
+				return;
+			} else {
+				if (icon) {
+					icon.innerHTML = '<span class="iconify" data-icon="fe:arrow-down"></span>';
+				}
+			}
 			const project = projectData.posts[projectId] || {}
 			if (target && Object.keys(project).length) {
 				console.log('projectData :>> ', project);
@@ -66,14 +77,15 @@
 				const buttons = project.action_buttons;
 				html += '<div class="sppr-buttons">';
 				if (buttons['button_1'] !== '') {
-					html += '<a href="' + buttons['button_1_link'] + '">' + buttons['button_1'] + '</a>';
+					html += '<a target="_blank" href="' + buttons['button_1_link'] + '">' + buttons['button_1'] + '</a>';
 				}
 				if (buttons['button_2'] !== '') {
-					html += '<a href="' + buttons['button_2_link'] + '">' + buttons['button_2'] + '</a>';
+					html += '<a target="_blank" href="' + buttons['button_2_link'] + '">' + buttons['button_2'] + '</a>';
 				}
 				if (buttons['button_3'] !== '') {
-					html += '<a href="' + buttons['button_3_link'] + '">' + buttons['button_3'] + '</a>';
+					html += '<a target="_blank" href="' + buttons['button_3_link'] + '">' + buttons['button_3'] + '</a>';
 				}
+				html += '<a target="_blank" href="' + project.permalink + '">More Info</a>';
 				html += '</div>';
 
 				html += '</div>';
@@ -126,7 +138,7 @@
 			let projectsHtml = ''
 			console.log(`filterPosts`, posts)
 			if (filterPosts.length > 0) {
-				projectsHtml = filterPosts.map((key) => {
+				projectsHtml = filterPosts.reverse().map((key) => {
 					let html = '';
 					const div = document.createElement('DIV');
 					div.setAttribute('class', 'sppr-item-wrapper');
@@ -134,17 +146,31 @@
 					div.addEventListener('click', (e) => itemClick(key));
 					html += '<div class="sppr-item">';
 					html += '<div class="sppr-title">';
-					html += '<span class="sppr-new">New</span>';
-					if (posts[key]['logo'][0] !== undefined && posts[key]['logo'][0] !== '') {
-						html += '<div class="sppr-logo"><img src="' + posts[key]["logo"][0] + '"/></div>';
+
+					const top_buttons = posts[key]?.top_buttons;
+					const post_interval = parseInt(posts[key]?.post_interval);
+					html += '<div class="sppr-top-bar">';
+					if (post_interval <= 1 && top_buttons['top_btn_1'] !== '') {
+						html += '<span class="sppr-top-bar-btn sppr-new">' + top_buttons['top_btn_1'] + '</span>';
 					}
+					if (!!top_buttons['top_btn_2'] && top_buttons['top_btn_2'] !== '') {
+						html += '<span class="sppr-top-bar-btn sppr-new2">' + top_buttons['top_btn_2'] + '</span>';
+					}
+					if (!!top_buttons['top_btn_3'] && top_buttons['top_btn_3'] !== '') {
+						html += '<span class="sppr-top-bar-btn sppr-new3">' + top_buttons['top_btn_3'] + '</span>';
+					}
+					if (!!top_buttons['top_btn_4'] && top_buttons['top_btn_4'] !== '') {
+						html += '<span class="sppr-top-bar-btn sppr-new4">' + top_buttons['top_btn_4'] + '</span>';
+					}
+					html += '</div>';
 					html += '<div class="sppr-name">' + posts[key]['post_title'] + '</div>';
 					html += '</div>';
 					html += '<div class="sppr-button"><span class="sppr-risks sppr-risks-' + posts[key]['risks'] + '">' + risks[posts[key]['risks']] + '</span></div>';
 					html += '<div class="sppr-network"><span class="sppr-network sppr-network-' + posts[key]['network'] + '"><img src="' + pluginDirUrl + 'public/icons/network/' + networks[posts[key]['network']].replace(/\s+/g, '').toLowerCase() + '.svg" alt="" class="network-logo"></span></div>';
-					html += '<div class="sppr-site"><a href="' + posts[key]['action_buttons']['button_1_link'] + '">&#128279; Visit Website</a></div>';
-					html += '<div class="sppr-arrow"><span class="sppr-right-arrow">&rsaquo;</span></div>';
+					html += '<div class="sppr-arrow"><span class="iconify" data-icon="fe:arrow-down"></span></div>';
+					html += '<div class="sppr-site"><a href="' + posts[key]['action_buttons']['button_1_link'] + '">Visit Website &nbsp;<span class="iconify" data-icon="fa-solid:external-link-alt"></span></a></div>';
 					html += '</div>';
+					// html += '<div class="sppr-more-view sppr-arrow"><span class="iconify" data-icon="fe:arrow-right"></span></div>';
 					html += '<div id="sppr-details-' + key + '" class="sppr-details"></div>';
 					div.innerHTML = html;
 					return div;
@@ -200,7 +226,7 @@
 
 
 		// Fetch data
-		$.getJSON('http://chat.test/wp-json/sppr/v1/projects/list', {}, function (data, textStatus, jqXHR) {
+		$.getJSON(spprobj.siteUrl + '/wp-json/sppr/v1/projects/list', {}, function (data, textStatus, jqXHR) {
 			// console.log('data :>> ', data);
 			projectData = data;
 			console.log(`data`, data)

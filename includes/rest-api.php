@@ -10,10 +10,10 @@ add_action( 'rest_api_init', function () {
 
 function sppr_projects_func()
 {
-    $data =[];
-    $data['risks'] = SPPRTemplates::$risks;
-    $data['networks'] = SPPRTemplates::$networks;
-    $data['posts'] = SPPRProjectHelper::get_posts_meta();
-   return $data;
+  $data =[];
+  $data['risks'] = SPPRTemplates::$risks;
+  $data['networks'] = SPPRTemplates::$networks;
+  $data['posts'] = SPPRProjectHelper::get_posts_meta();
+  return $data;
 }
 
